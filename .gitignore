@@ -4,4 +4,7 @@ env/
 *.log
 build/
 dist/
+data/
+__pycache__/
+Temp/
 *.spec
