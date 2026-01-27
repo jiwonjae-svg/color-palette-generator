@@ -1,0 +1,13 @@
+2026-01-03 16:05:28,305 - INFO - ==================================================
+2026-01-03 16:05:28,305 - INFO - Logging system initialized
+2026-01-03 16:05:28,305 - INFO - Application started
+2026-01-03 16:05:28,305 - INFO - Preset palettes not found. Generating in background...
+2026-01-03 16:05:28,306 - INFO - Keyboard shortcuts enabled
+2026-01-03 16:05:28,314 - INFO - Saved data file: data\preset_palettes.dat
+2026-01-03 16:05:28,315 - INFO - Successfully generated 880 preset palettes
+2026-01-03 16:05:28,707 - INFO - Generated palette from HEX: #3498db
+2026-01-03 16:05:32,797 - INFO - Added new palette: 새 팔레트2
+2026-01-03 16:05:32,967 - INFO - Added new palette: 새 팔레트3
+2026-01-03 16:05:33,157 - INFO - Added new palette: 새 팔레트4
+2026-01-03 16:05:33,307 - INFO - Added new palette: 새 팔레트5
+2026-01-03 16:06:07,223 - INFO - Application closed
