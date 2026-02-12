@@ -7,7 +7,7 @@ import random
 
 
 class PresetPaletteGenerator:
-    """사전 정의 팔레트 생성기"""
+    """Pre-defined palette generator"""
     
     # Color schemes from popular design systems
     MATERIAL_DESIGN_COLORS = {

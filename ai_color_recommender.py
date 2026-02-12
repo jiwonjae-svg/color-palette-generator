@@ -1,6 +1,6 @@
 """
-AI 색상 추천 모듈
-Google Gemini API를 사용하여 색상 팔레트 생성
+AI Color Recommendation Module
+Generate color palettes using Google Gemini API
 """
 
 import os
@@ -8,11 +8,18 @@ import json
 import re
 from typing import List, Tuple, Optional
 
+try:
+    import google.generativeai as genai  # type: ignore[import-untyped]
+    GENAI_AVAILABLE = True
+except ImportError:
+    genai = None
+    GENAI_AVAILABLE = False
+
 from language_manager import LanguageManager
 
 
 class AIColorRecommender:
-    """AI 기반 색상 추천 클래스"""
+    """AI-based color recommendation class"""
     
     def __init__(self, api_key: Optional[str] = None, lang: Optional[LanguageManager] = None):
         self.api_key = api_key
@@ -27,19 +34,20 @@ class AIColorRecommender:
         return text.format(**kwargs) if kwargs else text
     
     def initialize_model(self):
-        """Gemini 모델 초기화"""
+        """Initialize Gemini model"""
         try:
-            import google.generativeai as genai
+            if not GENAI_AVAILABLE:
+                raise ImportError(self._t('ai_recommender_missing_library', install_cmd='pip install google-generativeai'))
             genai.configure(api_key=self.api_key)
             self.model = genai.GenerativeModel('gemini-2.5-flash-lite')
             return True
-        except ImportError:
-            raise ImportError(self._t('ai_recommender_missing_library', install_cmd='pip install google-generativeai'))
+        except ImportError as e:
+            raise e
         except Exception as e:
             raise Exception(self._t('ai_recommender_init_failed', error=str(e)))
     
     def set_api_key(self, api_key: str) -> bool:
-        """API 키 설정"""
+        """Set API key"""
         self.api_key = api_key
         try:
             self.initialize_model()
@@ -49,20 +57,20 @@ class AIColorRecommender:
     
     def generate_palettes(self, num_palettes: int = 5, keywords: str = "", num_colors: int = 5) -> List[dict]:
         """
-        AI로 색상 팔레트 생성
+        Generate color palettes using AI
         
         Args:
-            num_palettes: 생성할 팔레트 개수
-            keywords: 키워드 (예: "ocean, calm, blue")
-            num_colors: 팔레트당 색상 개수
+            num_palettes: Number of palettes to generate
+            keywords: Keywords (e.g.: "ocean, calm, blue")
+            num_colors: Number of colors per palette
         
         Returns:
-            팔레트 리스트 (각 팔레트는 {'name': str, 'colors': List[str]} 딕셔너리)
+            List of palettes (each palette is a {'name': str, 'colors': List[str]} dict)
         """
         if not self.model:
             raise Exception(self._t('ai_recommender_api_key_not_set'))
         
-        # 프롬프트 생성 (이름 포함)
+        # Generate prompt (including name)
         if keywords.strip():
             prompt = self._t(
                 'ai_recommender_prompt_with_keywords',
@@ -81,41 +89,41 @@ class AIColorRecommender:
             response = self.model.generate_content(prompt)
             text = response.text.strip()
             
-            # 응답 파싱
+            # Parse response
             palettes = self._parse_response(text, num_colors)
-            return palettes[:num_palettes]  # 요청한 개수만큼 반환
+            return palettes[:num_palettes]  # Return up to the requested count
             
         except Exception as e:
             raise Exception(self._t('ai_recommender_generation_failed', error=str(e)))
     
     def _parse_response(self, text: str, expected_colors: int) -> List[dict]:
-        """AI 응답 파싱 - 팔레트 이름과 색상 추출"""
+        """Parse AI response - extract palette names and colors"""
         palettes = []
         
-        # HEX 색상 코드 패턴
+        # HEX color code pattern
         hex_pattern = r'#[0-9A-Fa-f]{6}'
         
-        # 줄 단위로 처리
+        # Process line by line
         lines = text.split('\n')
         for line in lines:
-            # "PaletteName: #HEX,#HEX,..." 형식 파싱
+            # Parse "PaletteName: #HEX,#HEX,..." format
             if ':' in line:
                 parts = line.split(':', 1)
                 name = parts[0].strip()
                 colors = re.findall(hex_pattern, parts[1])
                 
                 if colors and len(colors) >= expected_colors and name:
-                    # 대문자로 통일
+                    # Normalize to uppercase
                     colors = [c.upper() for c in colors[:expected_colors]]
                     palettes.append({
                         'name': name,
                         'colors': colors
                     })
             else:
-                # 이름 없이 색상만 있는 경우 (하위 호환성)
+                # Colors only without name (backward compatibility)
                 colors = re.findall(hex_pattern, line)
                 if colors and len(colors) >= expected_colors:
-                    # 대문자로 통일
+                    # Normalize to uppercase
                     colors = [c.upper() for c in colors[:expected_colors]]
                     palettes.append({
                         'name': self.lang.get('palette_numbered').format(i=len(palettes) + 1),
@@ -125,13 +133,13 @@ class AIColorRecommender:
         return palettes
     
     def test_api_key(self) -> Tuple[bool, str]:
-        """API 키 테스트"""
+        """Test API key"""
         if not self.api_key:
             return False, self._t('ai_recommender_api_key_not_set')
         
         try:
             self.initialize_model()
-            # 간단한 테스트 요청
+            # Simple test request
             response = self.model.generate_content(self._t('ai_recommender_test_prompt'))
             if response and response.text:
                 return True, self._t('ai_recommender_test_success')
@@ -142,11 +150,11 @@ class AIColorRecommender:
 
 
 class AISettings:
-    """AI 설정 관리"""
+    """AI settings management"""
     
     @classmethod
     def save_settings(cls, file_handler, api_key: str, num_colors: int = 5, keywords: str = "") -> bool:
-        """설정 저장 (FileHandler 사용)"""
+        """Save settings (using FileHandler)"""
         try:
             data = {
                 'api_key': api_key,
@@ -159,7 +167,7 @@ class AISettings:
     
     @classmethod
     def load_settings(cls, file_handler) -> dict:
-        """설정 불러오기 (FileHandler 사용)"""
+        """Load settings (using FileHandler)"""
         return file_handler.load_data_file('ai_config.dat', default={
             'api_key': '',
             'num_colors': 5,

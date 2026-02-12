@@ -8,3 +8,10 @@ data/
 __pycache__/
 Temp/
 *.spec
+
+# Embedded resources (large binary data)
+embedded_icons.py
+assets/
+
+# Secret key file (security)
+secret.key

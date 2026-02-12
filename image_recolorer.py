@@ -10,9 +10,6 @@ import numpy as np
 class ImageRecolorer:
     """Apply palette colors to images based on brightness zones"""
     
-    def __init__(self):
-        pass
-    
     def hex_to_rgb(self, hex_color):
         """Convert HEX to RGB tuple"""
         hex_color = hex_color.lstrip('#')

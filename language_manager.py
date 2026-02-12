@@ -1,21 +1,21 @@
 """
-다국어 지원 모듈
-한국어/영어 UI 텍스트 관리
+Multilingual support module
+Korean/English UI text management
 """
 
 class LanguageManager:
-    """언어 관리 클래스"""
+    """Language management class"""
     
-    # 한국어 텍스트
+    # Korean text
     KOREAN = {
-        # 메뉴
+        # Menu
         'menu_file': '파일',
         'menu_edit': '편집',
         'menu_view': '보기',
         'menu_settings': '설정',
         'menu_help': '도움말',
         
-        # 파일 메뉴
+        # File menu
         'file_new': '새로 만들기...',
         'file_open': '열기...',
         'file_save': '저장...',
@@ -24,22 +24,22 @@ class LanguageManager:
         'file_export': '내보내기',
         'file_exit': '종료',
         
-        # 편집 메뉴
+        # Edit menu
         'edit_copy': '복사',
         'edit_paste': '붙여넣기',
         'edit_clear': '지우기',
         
-        # 설정 메뉴
+        # Settings menu
         'settings_title': '설정...',
         'settings_language': '언어',
         'settings_theme': '테마',
         'settings_api': 'AI 설정...',
         
-        # 테마
+        # Theme
         'theme_light': '라이트 테마',
         'theme_dark': '다크 테마',
         
-        # 메인 UI
+        # Main UI
         'title': '색상 팔레트 생성기',
         'color_input': '색상 입력',
         'pick_color': '색상 선택',
@@ -62,7 +62,7 @@ class LanguageManager:
         'custom_color_harmonies': '커스텀 색상 조화...',
         'preset_palettes': '프리셋 팔레트...',
         
-        # 색상 조합
+        # Color harmonies
         'complementary': '보색',
         'analogous': '유사색',
         'triadic': '삼각 조화색',
@@ -72,7 +72,7 @@ class LanguageManager:
         'tetradic': '테트라딕',
         'double_complementary': '더블 보색',
         
-        # AI 팔레트
+        # AI palette
         'ai_palette': 'AI 팔레트',
         'ai_generate': '생성',
         'ai_clear': '지우기',
@@ -82,7 +82,7 @@ class LanguageManager:
         'ai_generating': 'AI 팔레트 생성 중...',
         'ai_no_palettes': 'AI 팔레트가 없습니다. 생성 버튼을 눌러 생성하세요.',
         
-        # 저장된 팔레트
+        # Saved palettes
         'saved_palettes': '저장된 팔레트',
         'save_current': '현재 팔레트 저장',
         'rename': '이름 바꾸기',
@@ -91,21 +91,16 @@ class LanguageManager:
         'delete_palette': '팔레트 삭제',
         'export_txt': 'TXT로 내보내기',
         'export_png': 'PNG로 내보내기',
-        'view_rgb': 'RGB로 보기',
-        'view_value': '밸류로 보기',
         
-        # 팔레트 편집기
+        # Palette editor
         'palette_editor': '팔레트 편집',
         'add_color': '색상 추가',
-        'edit_color': '색상 수정',
         'delete_color': '색상 삭제',
         'hsv_adjust': 'HSV 조정',
-        'confirm': '확인',
-        'cancel': '취소',
         'reset': '초기화',
         'apply': '적용',
         
-        # HSV 조정
+        # HSV adjustment
         'hsv_dialog_title': '색상 조정 (HSV)',
         'hue': '색조 (Hue)',
         'saturation': '채도 (Saturation)',
@@ -113,9 +108,8 @@ class LanguageManager:
         'brightness': '밝기',
         'contrast': '대비',
         'warmth': '색온도',
-        'preview': '미리보기',
         
-        # 메시지
+        # Messages
         'error': '오류',
         'warning': '경고',
         'info': '정보',
@@ -127,19 +121,13 @@ class LanguageManager:
         'api_error': 'API 오류가 발생했습니다.',
         'no_color': '색상이 없습니다.',
 
-        # main.py 공통 메시지 (이미지/저장/불러오기)
+        # main.py common messages (image/save/load)
         'save_error_title': '저장 오류',
         'load_error_title': '불러오기 오류',
-        'saved_title': '저장 완료',
-        'loaded_title': '불러오기 완료',
-        'msg_file_not_found': '파일을 찾을 수 없습니다.',
         'msg_large_file_title': '큰 파일',
         'msg_large_file_prompt': '파일 크기가 {size_mb}MB입니다. 계속하시겠습니까?',
         'msg_thumbnail_failed': '이미지 미리보기를 생성할 수 없습니다.',
         'msg_image_load_failed': '이미지 로드 실패: {error}',
-        'msg_no_save_path': '저장 경로가 지정되지 않았습니다.',
-        'msg_workspace_saved': '워크스페이스를 저장했습니다: {path}',
-        'msg_workspace_loaded': '워크스페이스를 불러왔습니다: {path}',
         'msg_permission_denied_write': '파일에 쓰기 권한이 없습니다.',
         'msg_disk_error': '디스크 오류: {error}',
         'msg_save_failed': '저장 실패: {error}',
@@ -150,21 +138,14 @@ class LanguageManager:
         'msg_capture_failed': '화면 캡처 실패: {error}',
         'msg_save_screenshot_failed': '스크린샷 영역 저장 실패: {error}',
 
-        'save_prompt_title': '저장',
-        'msg_save_changes_prompt': '현재 작업을 저장하시겠습니까?',
         'msg_generate_palette_first': '저장하기 전에 먼저 팔레트를 생성하세요.',
         'msg_save_txt_failed': 'TXT 저장 실패: {error}',
         'msg_save_png_failed': 'PNG 저장 실패: {error}',
         'msg_saved_txt_summary': '{count}개의 TXT 파일을 저장했습니다: {dest_dir}',
         'msg_saved_png_summary': '{count}개의 PNG 파일을 저장했습니다: {dest_dir}',
         'msg_select_harmony_required': '최소 하나의 색상 조화를 선택하세요.',
-        'no_recent_files': '(최근 파일 없음)',
-        'msg_file_not_found_path': '파일을 찾을 수 없습니다: {path}',
 
         'input_error_title': '입력 오류',
-        'ai_error_title': 'AI 오류',
-        'ai_generating_title': 'AI 팔레트 생성 중...',
-        'ai_palette_name': 'AI 팔레트 {i}',
 
         'msg_ai_api_key_required': 'AI 설정에서 API 키를 입력하세요.',
         'msg_ai_init_failed': 'AI 초기화 실패: {error}',
@@ -178,22 +159,14 @@ class LanguageManager:
 
         'msg_export_png_failed': 'PNG 내보내기 실패: {error}',
 
-        'export_title': '내보내기',
-        'my_palette_file': '내 팔레트',
-        'text_file': '텍스트 파일',
         'export_txt_palette_label': '팔레트: {name}',
         'export_txt_color_count_label': '색상 개수: {count}',
         'msg_export_txt_failed': 'TXT 내보내기 실패: {error}',
 
         'custom_harmony_default_name': '커스텀 조합',
 
-        'reset_settings_title': '설정 초기화',
-        'reset_done_title': '초기화 완료',
-        'msg_reset_settings_confirm': '모든 설정을 기본값으로 복원하시겠습니까?',
-        'msg_settings_reset_done': '설정이 기본값으로 복원되었습니다.\n재시작하여 변경사항을 적용하세요.',
         'msg_no_saved_palettes': '저장된 팔레트가 없습니다.\n먼저 팔레트를 생성하고 저장하세요.',
 
-        'png_image': 'PNG 이미지',
         'jpeg_image': 'JPEG 이미지',
         'msg_load_image_first': '먼저 이미지를 불러오세요.',
         'msg_empty_palette_cannot_apply': '빈 팔레트는 적용할 수 없습니다.',
@@ -209,20 +182,20 @@ class LanguageManager:
         'msg_color_adjust_unavailable': '색상 조정 기능을 사용할 수 없습니다.',
         'msg_color_adjust_failed': '색상 조정 실패: {error}',
 
-        # 공통 표시/포맷
+        # Common display/format
         'ellipsis': '...',
         'rgb_unknown': '(?, ?, ?)',
         'label_numbered_rgb': '{i}. RGB: {value}',
         'tooltip_recent_color_info': 'RGB: {rgb}\nHEX: {hex}\n흑백값: {lum}',
         'custom_harmony_numbered': '커스텀 {i}',
 
-        # 설정 UI
+        # Settings UI
         'settings_window_size_separator': 'x',
 
-        # 프리셋 팔레트
+        # Preset palettes
         'preset_tags_format': '({tags})',
 
-        # 내보내기(TXT/PNG) 파일 내용
+        # Export (TXT/PNG) file content
         'export_txt_file_header': '팔레트 내보내기: {timestamp}',
         'export_txt_palette_title': '팔레트 {i}',
         'export_txt_line_base': '기본: {hex} | RGB: {rgb}',
@@ -241,26 +214,26 @@ class LanguageManager:
         'export_png_label_monochromatic': '단색',
         'export_png_label_numbered': '{label} {i}',
         
-        # 버튼
+        # Buttons
         'ok': '확인',
         'yes': '예',
         'no': '아니오',
         
-        # 기타
+        # Other
         'base_color': '기본 색상',
         'representative_color': '대표 색상',
         'palette_name': '팔레트 이름',
         'new_name': '새 이름',
         'enter_name': '이름을 입력하세요',
         
-        # 팔레트 목록 버튼 툴팁
+        # Palette list button tooltips
         'tooltip_add_palette': '팔레트 추가',
         'tooltip_delete_palette': '팔레트 제거',
         'tooltip_copy_palette': '팔레트 복사',
         'tooltip_load_palette': '팔레트 불러오기',
         'tooltip_adjust_color': '색상 조정',
         
-        # 파일 다이얼로그
+        # File dialogs
         'dialog_select_image': '이미지 선택',
         'dialog_save_pgf': 'PGF로 저장...',
         'dialog_save_as': '다른 이름으로 저장...',
@@ -268,7 +241,7 @@ class LanguageManager:
         'dialog_select_image_recolor': '이미지 선택',
         'dialog_save_recolored': '팔레트 적용 이미지 저장',
         
-        # 색상 선택 다이얼로그
+        # Color selection dialogs
         'harmonies_title': '색상 조화 선택',
         'select_harmonies': '표시할 색상 조화를 선택하세요:',
         'custom_harmonies': '커스텀 색상 조화:',
@@ -276,30 +249,26 @@ class LanguageManager:
         'add_color_title': '색상 추가',
         'edit_color_title': '색상 수정',
         
-        # 색상 박스 툴팁
+        # Color box tooltip
         'tooltip_color_box': '왼쪽 클릭: 팔레트에 추가\n오른쪽 클릭: 기본 색상으로 설정',
         
-        # 팔레트 편집 버튼
+        # Palette edit buttons
         'sort_by_hue': '색조 정렬',
         'sort_by_saturation': '채도 정렬',
         'sort_by_luminance': '밸류 정렬',
         'sort_reverse': '역순 정렬',
         'show_values': '값 보기',
         
-        # 로딩/상태 메시지
+        # Loading/status messages
         'screenshot_label': '**스크린샷**',
         'no_image_label': '이미지가 없습니다.',
         'empty_palette': '빈 팔레트입니다',
         'generating_ai': 'AI 팔레트 생성 중...',
         
-        # 설정 다이얼로그 섹션
-        'settings_language_section': '언어 설정',
+        # Settings dialog sections
         'settings_theme_section': '테마 설정',
-        'settings_autosave_section': '자동 저장 설정',
-        'settings_extraction_section': '색상 추출 설정',
-        'settings_ui_section': 'UI 설정',
         
-        # 설정 옵션
+        # Settings options
         'language_label': '언어:',
         'theme_label': '테마:',
         'autosave_enable': '자동 저장 사용',
@@ -309,7 +278,7 @@ class LanguageManager:
         'window_size': '창 크기:',
         'recent_files_count': '최근 파일 수:',
         
-        # 이미지 재색상 다이얼로그
+        # Image recolor dialog
         'select_palette_label': '팔레트 선택:',
         'load_image_btn': '이미지 불러오기',
         'view_original_btn': '원본 크기로 보기',
@@ -317,7 +286,7 @@ class LanguageManager:
         'close_btn': '닫기',
         'preview_label': '미리보기',
         
-        # AI 설정 다이얼로그
+        # AI settings dialog
         'ai_api_key_label': 'Gemini API 키:',
         'ai_api_help': 'API 키는 https://aistudio.google.com/app/apikey 에서 발급받을 수 있습니다.',
         'ai_colors_per_palette': '팔레트당 색상 개수:',
@@ -325,11 +294,11 @@ class LanguageManager:
         'ai_keywords_example': '예: ocean, calm, blue',
         'ai_test_api': 'API 키 테스트',
         
-        # 일반
+        # General
         'image_files': '이미지 파일',
         'all_files': '모든 파일',
         
-        # 다이얼로그 제목
+        # Dialog titles
         'dialog_settings': '설정',
         'dialog_palette_editor': '팔레트 편집',
         'dialog_ai_settings': 'AI 설정',
@@ -339,22 +308,22 @@ class LanguageManager:
         'dialog_preset_palettes': '프리셋 팔레트',
         'dialog_rename_palette': '팔레트 이름 변경',
 
-        # 공통
+        # Common
         'unnamed': '이름없음',
         'done': '완료',
 
-        # 모듈/다이얼로그 오류
+        # Module/Dialog errors
         'custom_harmony_module_missing': '커스텀 조합 모듈을 찾을 수 없습니다.',
         'custom_harmony_open_failed': '커스텀 조합 열기 실패: {error}',
         'preset_module_missing': '프리셋 팔레트 모듈을 찾을 수 없습니다.',
         'preset_open_failed': '프리셋 팔레트 열기 실패: {error}',
 
-        # 프리셋 팔레트
+        # Preset palettes
         'preset_added_title': '팔레트 추가됨',
         'preset_added_msg': '"{name}" 팔레트를 저장된 팔레트에 추가했습니다.',
         'preset_pick_search_color': '검색할 색상 선택',
 
-        # 커스텀 조합
+        # Custom harmony
         'custom_harmony_select_delete': '삭제할 조합을 선택하세요.',
         'custom_harmony_confirm_delete': '정말 삭제하시겠습니까?',
         'custom_harmony_name_required': '조합 이름을 입력하세요.',
@@ -363,13 +332,13 @@ class LanguageManager:
         'custom_harmony_hsv_item': '{i}. HSV (H:{h:+.0f}°, S:{s:+.0f}%, V:{v:+.0f}%)',
         'custom_harmony_fixed_item': '{i}. 고정 색상: {hex}',
         
-        # 설정 창 메시지
+        # Settings window messages
         'settings_saved': '설정이 저장되었습니다.\n언어 변경은 재시작 후 적용됩니다.',
         'settings_save_failed': '설정 저장에 실패했습니다.',
         'settings_saved_title': '저장 완료',
         'settings_save_failed_title': '저장 실패',
         
-        # AI 오류 메시지
+        # AI error messages
         'ai_quota_exceeded': 'API 사용량 한계에 도달했습니다.\n잠시 후 다시 시도하거나 API 키를 확인해주세요.',
         'ai_api_test_success': 'API 키가 정상적으로 작동합니다!',
         'ai_api_test_failed': 'API 키 테스트 실패: {error}',
@@ -395,13 +364,13 @@ class LanguageManager:
     Example: Sunset Warm: #FF6B35,#F7931E,#FDC830,#F37335,#C0392B
     Give each palette a creative 2-3 word name. Output only palette lines.""",
         
-        # 팔레트 편집기 메시지
+        # Palette editor messages
         'palette_editor_title': '팔레트 편집 - {name}',
         'color_added': '색상이 추가되었습니다.',
         'color_edited': '색상이 수정되었습니다.',
         'select_color_first': '먼저 색상을 선택해주세요.',
         
-        # 컨텍스트 메뉴
+        # Context menu
         'context_rename': '이름 바꾸기',
         'context_edit_palette': '팔레트 편집',
         'context_save_palette': '팔레트 저장',
@@ -409,7 +378,7 @@ class LanguageManager:
         'context_export_png': 'PNG로 내보내기',
         'context_toggle_view': 'RGB로 보기',
         
-        # 설정 다이얼로그
+        # Settings dialog
         'settings_language_section': '언어 설정',
         'settings_autosave_section': '자동 저장 설정',
         'settings_extraction_section': '색상 추출 설정',
@@ -422,17 +391,16 @@ class LanguageManager:
         'settings_recent_files': '최근 파일 수:',
         'settings_recent_colors': '최근 사용 색상 최대 수:',
         'button_save': '저장',
-        'button_cancel': '취소',
         'button_close': '닫기',
         
-        # 이미지 재색상화 다이얼로그
+        # Image recoloring dialog
         'recolor_select_palette': '팔레트 선택:',
         'recolor_load_image': '이미지 불러오기',
         'recolor_view_original': '원본 크기로 보기',
         'recolor_preview': '미리보기',
         'recolor_empty_palette': '빈 팔레트입니다',
         
-        # 프리셋 팔레트 다이얼로그
+        # Preset palette dialog
         'preset_filter': '필터:',
         'preset_all': '모두',
         'preset_search_color': '색상으로 검색',
@@ -440,19 +408,19 @@ class LanguageManager:
         'preset_count': '{current} / {total} 팔레트',
         'preset_use': '사용',
         
-        # 색상 조화 레이블
+        # Color harmony labels
         'base_color_label': '기본 색상',
         'complementary_label': '보색',
         'analogous_label': '유사색',
         'triadic_label': '삼각 조화색',
         'color_box_tooltip': '좌클릭: 팔레트에 추가\n우클릭: 기본 색상으로 설정',
         
-        # 최근 색상
+        # Recent colors
         'recent_colors_title': '최근 사용 색상',
         'recent_colors_clear': '기록 지우기',
         'recent_colors_empty': '최근 사용한 색상이 없습니다',
         
-        # 팔레트 선택
+        # Palette selection
         'selection_required': '선택 필요',
         'select_palette_first': '먼저 오른쪽에서 저장된 팔레트를 선택하세요.',
         'select_palette_to_adjust': '조정할 팔레트를 선택하세요.',
@@ -476,7 +444,7 @@ class LanguageManager:
         'ai_module_missing': 'AI 추천 모듈을 찾을 수 없습니다.',
         'ai_settings_open_failed': 'AI 설정 열기 실패: {error}',
         
-        # 접근성 검사기
+        # Accessibility checker
         'accessibility_title': '접근성 검사',
         'accessibility_check': '대비율 검사',
         'accessibility_wcag_aa': 'WCAG AA 기준',
@@ -485,18 +453,16 @@ class LanguageManager:
         'accessibility_pass': '통과',
         'accessibility_fail': '실패',
         
-        # 그라디언트 생성기
+        # Gradient generator
         'gradient_title': '그라디언트 생성',
         'gradient_steps': '단계 수:',
         'gradient_generate': '생성',
         'gradient_color_from': '시작 색상',
         'gradient_color_to': '끝 색상',
         
-        # 커스텀 조화 편집기
+        # Custom harmony editor
         'saved_harmonies': '저장된 조합',
-        'new_harmony': '새 조합',
         'delete_harmony': '삭제',
-        'harmony_name': '조합 이름:',
         'color_list': '색상 목록',
         'colors': '색상',
         'fixed_color': '고정 색상',
@@ -513,10 +479,10 @@ class LanguageManager:
         'edit_color': '색상 수정',
         'preview': '미리보기',
         
-        # CustomTkinter UI 추가 키
-        'tab_palette': '🎨 팔레트',
-        'tab_recolor': '🖼️ 이미지 리컬러',
-        'tab_custom_harmony': '⚙️ 커스텀 조화',
+        # CustomTkinter UI additional keys
+        'tab_palette': '팔레트',
+        'tab_recolor': '이미지 리컬러',
+        'tab_custom_harmony': '커스텀 조화',
         'color_settings': '색상 설정',
         'source_type': '소스 유형',
         'selected_color': '선택된 색상',
@@ -552,16 +518,16 @@ class LanguageManager:
         'msg_no_preview': '미리보기가 없습니다. 먼저 팔레트를 적용하세요.',
         'select_harmony_prompt': '편집할 조합을 선택하세요',
     }    
-    # 영어 텍스트
+    # English text
     ENGLISH = {
-        # 메뉴
+        # Menu
         'menu_file': 'File',
         'menu_edit': 'Edit',
         'menu_view': 'View',
         'menu_settings': 'Settings',
         'menu_help': 'Help',
         
-        # 파일 메뉴
+        # File menu
         'file_new': 'New...',
         'file_open': 'Open...',
         'file_save': 'Save...',
@@ -570,22 +536,22 @@ class LanguageManager:
         'file_export': 'Export',
         'file_exit': 'Exit',
         
-        # 편집 메뉴
+        # Edit menu
         'edit_copy': 'Copy',
         'edit_paste': 'Paste',
         'edit_clear': 'Clear',
         
-        # 설정 메뉴
+        # Settings menu
         'settings_title': 'Settings...',
         'settings_language': 'Language',
         'settings_theme': 'Theme',
         'settings_api': 'AI Settings...',
         
-        # 테마
+        # Theme
         'theme_light': 'Light Theme',
         'theme_dark': 'Dark Theme',
         
-        # 메인 UI
+        # Main UI
         'title': 'Color Palette Generator',
         'color_input': 'Color Input',
         'pick_color': 'Pick Color',
@@ -608,7 +574,7 @@ class LanguageManager:
         'custom_color_harmonies': 'Custom Color Harmonies...',
         'preset_palettes': 'Preset Palettes...',
         
-        # 색상 조합
+        # Color harmonies
         'complementary': 'Complementary',
         'analogous': 'Analogous',
         'triadic': 'Triadic',
@@ -618,7 +584,7 @@ class LanguageManager:
         'tetradic': 'Tetradic',
         'double_complementary': 'Double Complementary',
         
-        # AI 팔레트
+        # AI palette
         'ai_palette': 'AI Palette',
         'ai_generate': 'Generate',
         'ai_clear': 'Clear',
@@ -628,7 +594,7 @@ class LanguageManager:
         'ai_generating': 'Generating AI palettes...',
         'ai_no_palettes': 'No AI palettes. Click Generate to create.',
         
-        # 저장된 팔레트
+        # Saved palettes
         'saved_palettes': 'Saved Palettes',
         'save_current': 'Save Current Palette',
         'rename': 'Rename',
@@ -637,21 +603,16 @@ class LanguageManager:
         'delete_palette': 'Delete Palette',
         'export_txt': 'Export as TXT',
         'export_png': 'Export as PNG',
-        'view_rgb': 'View as RGB',
-        'view_value': 'View as Value',
         
-        # 팔레트 편집기
+        # Palette editor
         'palette_editor': 'Palette Editor',
         'add_color': 'Add Color',
-        'edit_color': 'Edit Color',
         'delete_color': 'Delete Color',
         'hsv_adjust': 'HSV Adjust',
-        'confirm': 'OK',
-        'cancel': 'Cancel',
         'reset': 'Reset',
         'apply': 'Apply',
         
-        # HSV 조정
+        # HSV adjustment
         'hsv_dialog_title': 'Adjust Color (HSV)',
         'hue': 'Hue',
         'saturation': 'Saturation',
@@ -659,9 +620,8 @@ class LanguageManager:
         'brightness': 'Brightness',
         'contrast': 'Contrast',
         'warmth': 'Warmth',
-        'preview': 'Preview',
         
-        # 메시지
+        # Messages
         'error': 'Error',
         'warning': 'Warning',
         'info': 'Information',
@@ -676,16 +636,10 @@ class LanguageManager:
         # main.py common messages (image/save/load)
         'save_error_title': 'Save Error',
         'load_error_title': 'Load Error',
-        'saved_title': 'Saved',
-        'loaded_title': 'Loaded',
-        'msg_file_not_found': 'File not found.',
         'msg_large_file_title': 'Large File',
         'msg_large_file_prompt': 'The file size is {size_mb}MB. Continue?',
         'msg_thumbnail_failed': 'Unable to create image preview.',
         'msg_image_load_failed': 'Failed to load image: {error}',
-        'msg_no_save_path': 'No save path specified.',
-        'msg_workspace_saved': 'Workspace saved to {path}',
-        'msg_workspace_loaded': 'Workspace loaded from {path}',
         'msg_permission_denied_write': 'Permission denied.',
         'msg_disk_error': 'Disk error: {error}',
         'msg_save_failed': 'Failed to save: {error}',
@@ -696,21 +650,14 @@ class LanguageManager:
         'msg_capture_failed': 'Failed to capture screen: {error}',
         'msg_save_screenshot_failed': 'Failed to save screenshot region: {error}',
 
-        'save_prompt_title': 'Save',
-        'msg_save_changes_prompt': 'Do you want to save your current work?',
         'msg_generate_palette_first': 'Generate a palette first before saving.',
         'msg_save_txt_failed': 'Failed to save TXT: {error}',
         'msg_save_png_failed': 'Failed to save PNG: {error}',
         'msg_saved_txt_summary': 'Saved {count} TXT file(s) to {dest_dir}',
         'msg_saved_png_summary': 'Saved {count} PNG file(s) to {dest_dir}',
         'msg_select_harmony_required': 'Please select at least one color harmony.',
-        'no_recent_files': '(No recent files)',
-        'msg_file_not_found_path': 'File not found: {path}',
 
         'input_error_title': 'Input Error',
-        'ai_error_title': 'AI Error',
-        'ai_generating_title': 'Generating AI Palettes',
-        'ai_palette_name': 'AI Palette {i}',
 
         'msg_ai_api_key_required': 'Please enter API key in AI Settings.',
         'msg_ai_init_failed': 'AI initialization failed: {error}',
@@ -724,22 +671,14 @@ class LanguageManager:
 
         'msg_export_png_failed': 'PNG export failed: {error}',
 
-        'export_title': 'Export',
-        'my_palette_file': 'My Palette',
-        'text_file': 'Text File',
         'export_txt_palette_label': 'Palette: {name}',
         'export_txt_color_count_label': 'Color count: {count}',
         'msg_export_txt_failed': 'TXT export failed: {error}',
 
         'custom_harmony_default_name': 'Custom Harmony',
 
-        'reset_settings_title': 'Reset Settings',
-        'reset_done_title': 'Reset Complete',
-        'msg_reset_settings_confirm': 'Restore all settings to defaults?',
-        'msg_settings_reset_done': 'Settings have been restored to defaults.\nRestart to apply changes.',
         'msg_no_saved_palettes': 'No saved palettes.\nGenerate and save a palette first.',
 
-        'png_image': 'PNG Image',
         'jpeg_image': 'JPEG Image',
         'msg_load_image_first': 'Load an image first.',
         'msg_empty_palette_cannot_apply': 'Cannot apply an empty palette.',
@@ -787,26 +726,26 @@ class LanguageManager:
         'export_png_label_monochromatic': 'Monochromatic',
         'export_png_label_numbered': '{label} {i}',
         
-        # 버튼
+        # Buttons
         'ok': 'OK',
         'yes': 'Yes',
         'no': 'No',
         
-        # 기타
+        # Other
         'base_color': 'Base Color',
         'representative_color': 'Representative Color',
         'palette_name': 'Palette Name',
         'new_name': 'New Name',
         'enter_name': 'Enter name',
         
-        # 팔레트 목록 버튼 툴팁
+        # Palette list button tooltips
         'tooltip_add_palette': 'Add Palette',
         'tooltip_delete_palette': 'Remove Palette',
         'tooltip_copy_palette': 'Copy Palette',
         'tooltip_load_palette': 'Load Palette',
         'tooltip_adjust_color': 'Adjust Color',
         
-        # 파일 다이얼로그
+        # File dialogs
         'dialog_select_image': 'Select Image',
         'dialog_save_pgf': 'Save PGF...',
         'dialog_save_as': 'Save As...',
@@ -814,7 +753,7 @@ class LanguageManager:
         'dialog_select_image_recolor': 'Select Image',
         'dialog_save_recolored': 'Save Recolored Image',
         
-        # 색상 선택 다이얼로그
+        # Color selection dialogs
         'harmonies_title': 'Select Color Harmonies',
         'select_harmonies': 'Select color harmonies to display:',
         'custom_harmonies': 'Custom Harmonies:',
@@ -822,30 +761,26 @@ class LanguageManager:
         'add_color_title': 'Add Color',
         'edit_color_title': 'Edit Color',
         
-        # 색상 박스 툴팁
+        # Color box tooltip
         'tooltip_color_box': 'Left click: Add to palette\nRight click: Set as base color',
         
-        # 팔레트 편집 버튼
+        # Palette edit buttons
         'sort_by_hue': 'Sort by Hue',
         'sort_by_saturation': 'Sort by Saturation',
         'sort_by_luminance': 'Sort by Luminance',
         'sort_reverse': 'Reverse Order',
         'show_values': 'Show Values',
         
-        # 로딩/상태 메시지
+        # Loading/status messages
         'screenshot_label': '**Screenshot**',
         'no_image_label': 'No image',
         'empty_palette': 'Empty Palette',
         'generating_ai': 'Generating AI palettes...',
         
-        # 설정 다이얼로그 섹션
-        'settings_language_section': 'Language Settings',
+        # Settings dialog sections
         'settings_theme_section': 'Theme Settings',
-        'settings_autosave_section': 'Auto-save Settings',
-        'settings_extraction_section': 'Color Extraction Settings',
-        'settings_ui_section': 'UI Settings',
         
-        # 설정 옵션
+        # Settings options
         'language_label': 'Language:',
         'theme_label': 'Theme:',
         'autosave_enable': 'Enable Auto-save',
@@ -855,7 +790,7 @@ class LanguageManager:
         'window_size': 'Window Size:',
         'recent_files_count': 'Recent Files Count:',
         
-        # 이미지 재색상 다이얼로그
+        # Image recolor dialog
         'select_palette_label': 'Select Palette:',
         'load_image_btn': 'Load Image',
         'view_original_btn': 'View Original Size',
@@ -863,7 +798,7 @@ class LanguageManager:
         'close_btn': 'Close',
         'preview_label': 'Preview',
         
-        # AI 설정 다이얼로그
+        # AI settings dialog
         'ai_api_key_label': 'Gemini API Key:',
         'ai_api_help': 'Get your API key from https://aistudio.google.com/app/apikey',
         'ai_colors_per_palette': 'Colors per Palette:',
@@ -871,11 +806,11 @@ class LanguageManager:
         'ai_keywords_example': 'Example: ocean, calm, blue',
         'ai_test_api': 'Test API Key',
         
-        # 일반
+        # General
         'image_files': 'Image files',
         'all_files': 'All files',
         
-        # 다이얼로그 제목
+        # Dialog titles
         'dialog_settings': 'Settings',
         'dialog_palette_editor': 'Palette Editor',
         'dialog_ai_settings': 'AI Settings',
@@ -909,13 +844,13 @@ class LanguageManager:
         'custom_harmony_hsv_item': '{i}. HSV (H:{h:+.0f}°, S:{s:+.0f}%, V:{v:+.0f}%)',
         'custom_harmony_fixed_item': '{i}. Fixed Color: {hex}',
         
-        # 설정 창 메시지
+        # Settings window messages
         'settings_saved': 'Settings saved successfully.\nLanguage changes will be applied after restart.',
         'settings_save_failed': 'Failed to save settings.',
         'settings_saved_title': 'Saved',
         'settings_save_failed_title': 'Save Failed',
         
-        # AI 오류 메시지
+        # AI error messages
         'ai_quota_exceeded': 'API quota exceeded.\nPlease try again later or check your API key.',
         'ai_api_test_success': 'API key is working correctly!',
         'ai_api_test_failed': 'API key test failed: {error}',
@@ -923,13 +858,13 @@ class LanguageManager:
         'ai_api_network_error': 'Network error occurred. Please check your internet connection.',
         'ai_generation_failed': 'AI palette generation failed: {error}',
         
-        # 팔레트 편집기 메시지
+        # Palette editor messages
         'palette_editor_title': 'Palette Editor - {name}',
         'color_added': 'Color added.',
         'color_edited': 'Color edited.',
         'select_color_first': 'Please select a color first.',
         
-        # 컨텍스트 메뉴
+        # Context menu
         'context_rename': 'Rename',
         'context_edit_palette': 'Edit Palette',
         'context_save_palette': 'Save Palette',
@@ -937,7 +872,7 @@ class LanguageManager:
         'context_export_png': 'Export as PNG',
         'context_toggle_view': 'View as RGB',
         
-        # 설정 다이얼로그
+        # Settings dialog
         'settings_language_section': 'Language Settings',
         'settings_autosave_section': 'Auto-save Settings',
         'settings_extraction_section': 'Color Extraction Settings',
@@ -950,17 +885,16 @@ class LanguageManager:
         'settings_recent_files': 'Recent files:',
         'settings_recent_colors': 'Max recent colors:',
         'button_save': 'Save',
-        'button_cancel': 'Cancel',
         'button_close': 'Close',
         
-        # 이미지 재색상화 다이얼로그
+        # Image recoloring dialog
         'recolor_select_palette': 'Select Palette:',
         'recolor_load_image': 'Load Image',
         'recolor_view_original': 'View Original Size',
         'recolor_preview': 'Preview',
         'recolor_empty_palette': 'Empty palette',
         
-        # 프리셋 팔레트 다이얼로그
+        # Preset palette dialog
         'preset_filter': 'Filter:',
         'preset_all': 'All',
         'preset_search_color': 'Search by Color',
@@ -968,19 +902,19 @@ class LanguageManager:
         'preset_count': '{current} / {total} palettes',
         'preset_use': 'Use',
         
-        # 색상 조화 레이블
+        # Color harmony labels
         'base_color_label': 'Base Color',
         'complementary_label': 'Complementary',
         'analogous_label': 'Analogous',
         'triadic_label': 'Triadic',
         'color_box_tooltip': 'Left click: Add to palette\nRight click: Set as base color',
         
-        # 최근 색상
+        # Recent colors
         'recent_colors_title': 'Recent Colors',
         'recent_colors_clear': 'Clear History',
         'recent_colors_empty': 'No recent colors',
         
-        # 팔레트 선택
+        # Palette selection
         'selection_required': 'Selection Required',
         'select_palette_first': 'Please select a saved palette on the right first.',
         'select_palette_to_adjust': 'Please select a palette to adjust.',
@@ -1022,7 +956,7 @@ class LanguageManager:
     Give each palette a creative 2-3 word name. Output only palette lines.""",
         'ai_settings_open_failed': 'Failed to open AI settings: {error}',
         
-        # 접근성 검사기
+        # Accessibility checker
         'accessibility_title': 'Accessibility Check',
         'accessibility_check': 'Check Contrast',
         'accessibility_wcag_aa': 'WCAG AA Standard',
@@ -1031,18 +965,16 @@ class LanguageManager:
         'accessibility_pass': 'Pass',
         'accessibility_fail': 'Fail',
         
-        # 그라디언트 생성기
+        # Gradient generator
         'gradient_title': 'Generate Gradient',
         'gradient_steps': 'Number of steps:',
         'gradient_generate': 'Generate',
         'gradient_color_from': 'From Color',
         'gradient_color_to': 'To Color',
 
-        # 커스텀 조화 편집기
+        # Custom harmony editor
         'saved_harmonies': 'Saved Harmonies',
-        'new_harmony': 'New Harmony',
         'delete_harmony': 'Delete',
-        'harmony_name': 'Harmony Name:',
         'color_list': 'Color List',
         'colors': 'Colors',
         'fixed_color': 'Fixed Color',
@@ -1060,9 +992,9 @@ class LanguageManager:
         'preview': 'Preview',
         
         # CustomTkinter UI additional keys
-        'tab_palette': '🎨 Palette',
-        'tab_recolor': '🖼️ Image Recolor',
-        'tab_custom_harmony': '⚙️ Custom Harmony',
+        'tab_palette': 'Palette',
+        'tab_recolor': 'Image Recolor',
+        'tab_custom_harmony': 'Custom Harmony',
         'color_settings': 'Color Settings',
         'source_type': 'Source Type',
         'selected_color': 'Selected Color',
@@ -1102,20 +1034,20 @@ class LanguageManager:
     def __init__(self, language='ko'):
         """
         Args:
-            language: 'ko' (한국어) 또는 'en' (영어)
+            language: 'ko' (Korean) or 'en' (English)
         """
         self.language = language
         self.texts = self.KOREAN if language == 'ko' else self.ENGLISH
     
     def get(self, key, default=None):
-        """텍스트 가져오기"""
+        """Get text"""
         return self.texts.get(key, default or key)
     
     def set_language(self, language):
-        """언어 변경"""
+        """Change language"""
         self.language = language
         self.texts = self.KOREAN if language == 'ko' else self.ENGLISH
     
     def get_current_language(self):
-        """현재 언어 반환"""
+        """Return current language"""
         return self.language

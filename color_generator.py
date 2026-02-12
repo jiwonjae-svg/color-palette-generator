@@ -13,9 +13,6 @@ import logging
 class ColorPaletteGenerator:
     """Color palette generator class"""
     
-    def __init__(self):
-        pass
-    
     def extract_main_colors(self, image_path, num_colors=5, filter_background=True):
         """Extract main colors from image using improved K-means clustering"""
         img = Image.open(image_path)
@@ -141,7 +138,7 @@ class ColorPaletteGenerator:
         return colors
 
     def approximate_color_count(self, image_path, sample_size=None):
-        """이미지의 대략적인 색상 수를 계산합니다."""
+        """Calculate the approximate number of colors in an image."""
         img = Image.open(image_path)
         img = img.convert('RGB')
         img = img.resize((100, 100))
@@ -151,20 +148,20 @@ class ColorPaletteGenerator:
         return len(set(pixels))
 
     def hex_to_rgb(self, hex_code):
-        """HEX를 RGB로 변환"""
+        """Convert HEX to RGB"""
         hex_code = hex_code.lstrip('#')
         if len(hex_code) == 3:
             hex_code = ''.join([c*2 for c in hex_code])
         return tuple(int(hex_code[i:i+2], 16) for i in (0, 2, 4))
     
     def rgb_to_hex(self, rgb):
-        """RGB를 HEX로 변환"""
+        """Convert RGB to HEX"""
         if isinstance(rgb, tuple) or isinstance(rgb, list):
             return '#{:02x}{:02x}{:02x}'.format(int(rgb[0]), int(rgb[1]), int(rgb[2]))
         return '#000000'
     
     def rgb_to_hsv(self, r, g, b):
-        """RGB를 HSV로 변환 (with error handling)"""
+        """Convert RGB to HSV (with error handling)"""
         try:
             r = max(0, min(255, int(r)))
             g = max(0, min(255, int(g)))
@@ -175,7 +172,7 @@ class ColorPaletteGenerator:
             return 0.0, 0.0, 0.0
     
     def hsv_to_rgb(self, h, s, v):
-        """HSV를 RGB로 변환 (with bounds checking)"""
+        """Convert HSV to RGB (with bounds checking)"""
         try:
             h = h % 1.0
             s = max(0.0, min(1.0, s))
@@ -187,13 +184,13 @@ class ColorPaletteGenerator:
             return (0, 0, 0)
     
     def generate_complementary(self, rgb):
-        """보색 생성"""
+        """Generate complementary color"""
         h, s, v = self.rgb_to_hsv(*rgb)
         comp_h = (h + 0.5) % 1.0
         return self.hsv_to_rgb(comp_h, s, v)
     
     def generate_analogous(self, rgb, angle=30):
-        """유사색 생성 (각도 기반)"""
+        """Generate analogous colors (angle-based)"""
         h, s, v = self.rgb_to_hsv(*rgb)
         analogous_colors = []
         
@@ -204,7 +201,7 @@ class ColorPaletteGenerator:
         return analogous_colors
     
     def generate_triadic(self, rgb):
-        """삼각 조화색 생성"""
+        """Generate triadic harmony colors"""
         h, s, v = self.rgb_to_hsv(*rgb)
         triadic_colors = []
         
@@ -215,7 +212,7 @@ class ColorPaletteGenerator:
         return triadic_colors
     
     def generate_monochromatic(self, rgb, count=4):
-        """단색 조화 팔레트 생성 (명도/채도 변화)"""
+        """Generate monochromatic harmony palette (brightness/saturation variation)"""
         h, s, v = self.rgb_to_hsv(*rgb)
         mono_colors = []
         
@@ -227,7 +224,7 @@ class ColorPaletteGenerator:
         return mono_colors
 
     def generate_split_complementary(self, rgb):
-        """스플릿 보색 조화"""
+        """Generate split complementary harmony"""
         h, s, v = self.rgb_to_hsv(*rgb)
         colors = []
         for offset in [150/360, 210/360]:
@@ -236,7 +233,7 @@ class ColorPaletteGenerator:
         return colors
 
     def generate_square(self, rgb):
-        """스퀘어 조화"""
+        """Generate square harmony"""
         h, s, v = self.rgb_to_hsv(*rgb)
         colors = []
         for offset in [120/360, 180/360, 240/360]:
@@ -245,7 +242,7 @@ class ColorPaletteGenerator:
         return colors
 
     def generate_tetradic(self, rgb):
-        """테트라딕 조화"""
+        """Generate tetradic harmony"""
         h, s, v = self.rgb_to_hsv(*rgb)
         colors = []
         for offset in [60/360, 180/360, 240/360]:
@@ -254,7 +251,7 @@ class ColorPaletteGenerator:
         return colors
 
     def generate_double_complementary(self, rgb):
-        """더블 보색"""
+        """Generate double complementary"""
         h, s, v = self.rgb_to_hsv(*rgb)
         colors = []
         for offset in [30/360, 180/360, 210/360]:
@@ -263,29 +260,29 @@ class ColorPaletteGenerator:
         return colors
 
     def generate_random_color(self):
-        """랜덤 색상 생성"""
+        """Generate a random color"""
         return (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
     def adjust_brightness(self, rgb, factor):
-        """밝기 조절 (-0.5 ~ 0.5)"""
+        """Adjust brightness (-0.5 ~ 0.5)"""
         h, s, v = self.rgb_to_hsv(*rgb)
         new_v = max(0.0, min(1.0, v + factor))
         return self.hsv_to_rgb(h, s, new_v)
 
     def adjust_saturation(self, rgb, factor):
-        """채도 조절 (-0.5 ~ 0.5)"""
+        """Adjust saturation (-0.5 ~ 0.5)"""
         h, s, v = self.rgb_to_hsv(*rgb)
         new_s = max(0.0, min(1.0, s + factor))
         return self.hsv_to_rgb(h, new_s, v)
 
     def adjust_hue(self, rgb, degrees):
-        """색조 조절 (-180 ~ 180 degrees)"""
+        """Adjust hue (-180 ~ 180 degrees)"""
         h, s, v = self.rgb_to_hsv(*rgb)
         new_h = (h + degrees / 360.0) % 1.0
         return self.hsv_to_rgb(new_h, s, v)
 
     def get_color_temperature(self, rgb):
-        """색상 온도 계산 (warm=1, cool=-1, neutral=0)"""
+        """Calculate color temperature (warm=1, cool=-1, neutral=0)"""
         r, g, b = rgb
         if r > b + 30:
             return 1  # warm
@@ -295,7 +292,7 @@ class ColorPaletteGenerator:
             return 0  # neutral
 
     def generate_palette(self, source, source_type='hex'):
-        """팔레트 생성"""
+        """Generate palette"""
         if source_type == 'hex':
             base_color = self.hex_to_rgb(source)
         else:

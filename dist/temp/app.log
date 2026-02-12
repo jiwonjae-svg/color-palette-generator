@@ -11,3 +11,9 @@
 2026-01-03 16:05:33,157 - INFO - Added new palette: 새 팔레트4
 2026-01-03 16:05:33,307 - INFO - Added new palette: 새 팔레트5
 2026-01-03 16:06:07,223 - INFO - Application closed
+2026-02-12 11:01:47,929 - INFO - ==================================================
+2026-02-12 11:01:47,929 - INFO - Logging system initialized
+2026-02-12 11:01:47,929 - INFO - Application started
+2026-02-12 11:01:47,929 - INFO - Keyboard shortcuts enabled
+2026-02-12 11:01:48,477 - INFO - Generated palette from HEX: #3498db
+2026-02-12 11:01:50,345 - INFO - Application closed

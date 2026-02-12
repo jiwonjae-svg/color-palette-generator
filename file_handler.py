@@ -10,14 +10,29 @@ import logging
 import datetime
 from cryptography.fernet import Fernet
 
-EMBEDDED_KEY = b'VkZURWYzbUtiSFJ0Z2oyWHFwQjRwbjlSVldyakFrOWJPTUhjbGlDZmJZdz0='
+# Path to external key file
+KEY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'secret.key')
+
+
+def _load_key():
+    """Load Fernet key from external file"""
+    try:
+        with open(KEY_FILE, 'r', encoding='utf-8') as f:
+            key_b64 = f.read().strip()
+        return base64.b64decode(key_b64)
+    except FileNotFoundError:
+        logging.error(f"Key file not found: {KEY_FILE}")
+        raise
+    except Exception as e:
+        logging.error(f"Failed to load key: {e}")
+        raise
 
 
 class FileHandler:
     """File operations with encryption"""
     
     def __init__(self):
-        self._fernet_key = base64.b64decode(EMBEDDED_KEY)
+        self._fernet_key = _load_key()
         os.makedirs('data', exist_ok=True)
     
     def _encrypt_aes(self, data_string):
@@ -123,10 +138,6 @@ class FileHandler:
         except Exception as e:
             logging.error(f"Load failed: {str(e)}")
             return None
-    
-    def get_recent_files_path(self):
-        """Recent files list path in data folder"""
-        return os.path.join('data', 'recent_files.dat')
     
     def load_recent_files(self):
         """Load recent files list"""
