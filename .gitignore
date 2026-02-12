@@ -18,4 +18,6 @@ assets/
 secret.key
 
 # Test output files
- repomix-output.xml
+repomix-output.xml
+
+RELEASE_NOTES_v1.0.1.md
