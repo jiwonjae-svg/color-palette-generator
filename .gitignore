@@ -8,6 +8,7 @@ data/
 __pycache__/
 Temp/
 *.spec
+version/
 
 # Embedded resources (large binary data)
 embedded_icons.py
