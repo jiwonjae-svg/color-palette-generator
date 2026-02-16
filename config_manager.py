@@ -28,7 +28,18 @@ class ConfigManager:
 
         # Recent colors
         'recent_colors': [],
-        'max_recent_colors': 50
+        'max_recent_colors': 50,
+
+        # Keyboard shortcuts (tkinter event format)
+        'shortcuts': {
+            'new_file': '<Control-n>',
+            'open_file': '<Control-o>',
+            'save_file': '<Control-s>',
+            'save_as': '<Control-Shift-S>',
+            'generate': '<F5>',
+            'delete': '<Delete>',
+            'settings': '<Control-comma>',
+        }
     }
     
     def __init__(self, file_handler):

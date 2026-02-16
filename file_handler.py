@@ -4,14 +4,21 @@ Handles PGF file save/load, encryption, and recent files management
 """
 
 import os
+import sys
 import json
 import base64
 import logging
 import datetime
 from cryptography.fernet import Fernet
 
-# Path to external key file
-KEY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'secret.key')
+# Path to external key file (handle PyInstaller frozen environment)
+def _get_base_path():
+    """Get base path for bundled resources (handles PyInstaller)"""
+    if getattr(sys, 'frozen', False):
+        return sys._MEIPASS
+    return os.path.dirname(os.path.abspath(__file__))
+
+KEY_FILE = os.path.join(_get_base_path(), 'secret.key')
 
 
 def _load_key():

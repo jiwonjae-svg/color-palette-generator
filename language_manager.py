@@ -517,6 +517,21 @@ class LanguageManager:
         'delete': '삭제',
         'msg_no_preview': '미리보기가 없습니다. 먼저 팔레트를 적용하세요.',
         'select_harmony_prompt': '편집할 조합을 선택하세요',
+
+        # Shortcut settings
+        'settings_shortcuts_section': '단축키 설정',
+        'shortcut_new_file': '새로 만들기',
+        'shortcut_open_file': '파일 열기',
+        'shortcut_save_file': '저장',
+        'shortcut_save_as': '다른 이름으로 저장',
+        'shortcut_generate': '팔레트 생성',
+        'shortcut_delete': '팔레트 삭제',
+        'shortcut_settings': '설정 열기',
+        'shortcut_press_key': '키를 누르세요...',
+        'shortcut_reset': '기본값으로',
+        'shortcut_conflict': '단축키 충돌: "{action}"에서 이미 사용 중입니다.',
+        'shortcut_none': '없음',
+        'shortcut_clear': '해제',
     }    
     # English text
     ENGLISH = {
@@ -1029,6 +1044,21 @@ class LanguageManager:
         'delete': 'Delete',
         'msg_no_preview': 'No preview available. Apply palette first.',
         'select_harmony_prompt': 'Select a harmony to edit',
+
+        # Shortcut settings
+        'settings_shortcuts_section': 'Keyboard Shortcuts',
+        'shortcut_new_file': 'New File',
+        'shortcut_open_file': 'Open File',
+        'shortcut_save_file': 'Save',
+        'shortcut_save_as': 'Save As',
+        'shortcut_generate': 'Generate Palette',
+        'shortcut_delete': 'Delete Palette',
+        'shortcut_settings': 'Open Settings',
+        'shortcut_press_key': 'Press a key...',
+        'shortcut_reset': 'Reset to Default',
+        'shortcut_conflict': 'Shortcut conflict: already used by "{action}".',
+        'shortcut_none': 'None',
+        'shortcut_clear': 'Clear',
     }
     
     def __init__(self, language='ko'):

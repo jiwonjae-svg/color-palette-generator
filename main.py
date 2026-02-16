@@ -2461,6 +2461,186 @@ class PaletteApp(ctk.CTk):
         max_recent_colors_var = ctk.IntVar(value=self.config_manager.get('max_recent_colors', 50))
         ctk.CTkEntry(recent_colors_frame, textvariable=max_recent_colors_var, width=70, fg_color=COLORS['bg_card']).pack(side='left', padx=10)
 
+        # ── Keyboard Shortcuts section ──
+        sep3 = ctk.CTkFrame(scroll, height=1, fg_color=COLORS['border'])
+        sep3.pack(fill='x', pady=15)
+
+        ctk.CTkLabel(
+            scroll,
+            text=self.lang.get('settings_shortcuts_section'),
+            font=ctk.CTkFont(family=FONT_FAMILY, size=14, weight="bold"),
+            text_color=COLORS['text_primary']
+        ).pack(anchor='w', pady=(0, 10))
+
+        # Shortcut action definitions: (config_key, lang_key, default_binding)
+        shortcut_defs = [
+            ('new_file', 'shortcut_new_file', '<Control-n>'),
+            ('open_file', 'shortcut_open_file', '<Control-o>'),
+            ('save_file', 'shortcut_save_file', '<Control-s>'),
+            ('save_as', 'shortcut_save_as', '<Control-Shift-S>'),
+            ('generate', 'shortcut_generate', '<F5>'),
+            ('delete', 'shortcut_delete', '<Delete>'),
+            ('settings', 'shortcut_settings', '<Control-comma>'),
+        ]
+
+        current_shortcuts = self.config_manager.get('shortcuts', {})
+        shortcut_vars = {}  # config_key -> StringVar
+
+        def _event_to_display(event_str):
+            """Convert tkinter event string to readable display text"""
+            if not event_str:
+                return self.lang.get('shortcut_none')
+            text = event_str.strip('<>').replace('-', '+')
+            return text
+
+        def _check_conflict(config_key, new_event):
+            """Check if new_event conflicts with another shortcut"""
+            if not new_event:
+                return None
+            for ck, sv in shortcut_vars.items():
+                if ck != config_key and sv.get() == new_event:
+                    # Find the display name
+                    for dk, lk, _ in shortcut_defs:
+                        if dk == ck:
+                            return self.lang.get(lk)
+                    return ck
+            return None
+
+        def _capture_shortcut(config_key, display_label, btn):
+            """Open a small dialog to capture a key combination"""
+            capture_win = ctk.CTkToplevel(dialog)
+            set_window_icon(capture_win)
+            capture_win.title(self.lang.get('settings_shortcuts_section'))
+            capture_win.geometry("350x150")
+            capture_win.transient(dialog)
+            capture_win.grab_set()
+            capture_win.configure(fg_color=COLORS['bg_dark'])
+
+            ctk.CTkLabel(
+                capture_win,
+                text=self.lang.get('shortcut_press_key'),
+                font=ctk.CTkFont(family=FONT_FAMILY, size=16),
+                text_color=COLORS['text_primary']
+            ).pack(expand=True, pady=(20, 5))
+
+            status_label = ctk.CTkLabel(
+                capture_win,
+                text="",
+                font=ctk.CTkFont(family=FONT_FAMILY, size=12),
+                text_color=COLORS['text_muted']
+            )
+            status_label.pack(pady=(0, 5))
+
+            clear_btn_frame = ctk.CTkFrame(capture_win, fg_color="transparent")
+            clear_btn_frame.pack(pady=(0, 10))
+
+            def on_clear():
+                shortcut_vars[config_key].set('')
+                btn.configure(text=self.lang.get('shortcut_none'))
+                capture_win.destroy()
+
+            ModernSecondaryButton(
+                clear_btn_frame,
+                text=self.lang.get('shortcut_clear'),
+                command=on_clear,
+                width=80
+            ).pack(side='left', padx=5)
+
+            ModernSecondaryButton(
+                clear_btn_frame,
+                text=self.lang.get('button_cancel'),
+                command=capture_win.destroy,
+                width=80
+            ).pack(side='left', padx=5)
+
+            def on_key(event):
+                # Build tkinter-style event string
+                parts = []
+                if event.state & 0x4:
+                    parts.append('Control')
+                if event.state & 0x1:
+                    parts.append('Shift')
+                if event.state & 0x20000 or event.state & 0x8:
+                    parts.append('Alt')
+
+                keysym = event.keysym
+                # Skip lone modifiers
+                if keysym in ('Control_L', 'Control_R', 'Shift_L', 'Shift_R',
+                              'Alt_L', 'Alt_R', 'Meta_L', 'Meta_R', 'Win_L', 'Win_R'):
+                    return
+
+                # Capitalize single letters
+                if len(keysym) == 1 and keysym.isalpha() and 'Shift' in parts:
+                    keysym = keysym.upper()
+                elif len(keysym) == 1 and keysym.isalpha():
+                    keysym = keysym.lower()
+
+                parts.append(keysym)
+                event_str = '<' + '-'.join(parts) + '>'
+
+                # Check conflict
+                conflict = _check_conflict(config_key, event_str)
+                if conflict:
+                    status_label.configure(
+                        text=self.lang.get('shortcut_conflict').format(action=conflict),
+                        text_color=COLORS['error']
+                    )
+                    return
+
+                shortcut_vars[config_key].set(event_str)
+                btn.configure(text=_event_to_display(event_str))
+                capture_win.destroy()
+
+            capture_win.bind('<Key>', on_key)
+            capture_win.focus_force()
+
+        shortcut_buttons = {}  # config_key -> button widget
+
+        for cfg_key, lang_key, default_val in shortcut_defs:
+            current_val = current_shortcuts.get(cfg_key, default_val)
+
+            row_frame = ctk.CTkFrame(scroll, fg_color="transparent")
+            row_frame.pack(fill='x', padx=10, pady=3)
+
+            ctk.CTkLabel(
+                row_frame,
+                text=self.lang.get(lang_key),
+                text_color=COLORS['text_secondary'],
+                width=160,
+                anchor='w'
+            ).pack(side='left')
+
+            sv = ctk.StringVar(value=current_val)
+            shortcut_vars[cfg_key] = sv
+
+            shortcut_btn = ModernSecondaryButton(
+                row_frame,
+                text=_event_to_display(current_val),
+                width=180
+            )
+            shortcut_btn.pack(side='left', padx=10)
+            shortcut_btn.configure(
+                command=lambda ck=cfg_key, lk=lang_key, b=shortcut_btn: _capture_shortcut(ck, lk, b)
+            )
+            shortcut_buttons[cfg_key] = shortcut_btn
+
+        # Reset shortcuts button
+        def _reset_shortcuts():
+            defaults = ConfigManager.DEFAULT_CONFIG.get('shortcuts', {})
+            for cfg_key, lang_key, default_val in shortcut_defs:
+                dv = defaults.get(cfg_key, default_val)
+                shortcut_vars[cfg_key].set(dv)
+                shortcut_buttons[cfg_key].configure(text=_event_to_display(dv))
+
+        shortcut_reset_frame = ctk.CTkFrame(scroll, fg_color="transparent")
+        shortcut_reset_frame.pack(fill='x', padx=10, pady=(5, 0))
+        ModernSecondaryButton(
+            shortcut_reset_frame,
+            text=self.lang.get('shortcut_reset'),
+            command=_reset_shortcuts,
+            width=150
+        ).pack(anchor='w')
+
         # Button frame
         btn_frame = ctk.CTkFrame(dialog, fg_color="transparent")
         btn_frame.pack(pady=15, padx=15, fill='x')
@@ -2473,6 +2653,12 @@ class PaletteApp(ctk.CTk):
             self.config_manager.set('window_width', width_var.get())
             self.config_manager.set('window_height', height_var.get())
             self.config_manager.set('max_recent_colors', max(1, min(100, max_recent_colors_var.get())))
+            
+            # Save shortcuts
+            new_shortcuts = {}
+            for ck, _, dv in shortcut_defs:
+                new_shortcuts[ck] = shortcut_vars[ck].get()
+            self.config_manager.set('shortcuts', new_shortcuts)
             
             if self.config_manager.save_config():
                 messagebox.showinfo(self.lang.get('settings_saved_title'), self.lang.get('settings_saved'))
@@ -2492,6 +2678,9 @@ class PaletteApp(ctk.CTk):
                     self.config_manager.set('recent_colors', self.recent_colors)
                     self.config_manager.save_config()
                 self.update_recent_colors_display()
+                
+                # Re-apply keyboard shortcuts
+                self.bind_shortcuts()
                 
                 dialog.destroy()
             else:
@@ -2968,13 +3157,38 @@ class PaletteApp(ctk.CTk):
             pass
     
     def bind_shortcuts(self):
-        """Setup keyboard shortcuts"""
-        self.bind('<Control-s>', lambda e: self.save_pgf())
-        self.bind('<Control-Shift-S>', lambda e: self.save_pgf_as())
-        self.bind('<Control-n>', lambda e: self.new_pgf())
-        self.bind('<Control-o>', lambda e: self.load_pgf())
-        self.bind('<Delete>', lambda e: self.remove_saved_palette())
-        self.bind('<F5>', lambda e: self.generate())
+        """Setup keyboard shortcuts from config"""
+        # Unbind previous shortcuts
+        if hasattr(self, '_bound_shortcuts'):
+            for event_str in self._bound_shortcuts:
+                try:
+                    self.unbind(event_str)
+                except Exception:
+                    pass
+        
+        self._bound_shortcuts = []
+        shortcuts = self.config_manager.get('shortcuts', {})
+        
+        # Default shortcut map: config_key -> handler
+        shortcut_actions = {
+            'new_file': self.new_pgf,
+            'open_file': self.load_pgf,
+            'save_file': self.save_pgf,
+            'save_as': self.save_pgf_as,
+            'generate': self.generate,
+            'delete': self.remove_saved_palette,
+            'settings': self.open_settings,
+        }
+        
+        for action_key, handler in shortcut_actions.items():
+            event_str = shortcuts.get(action_key, '')
+            if event_str:
+                try:
+                    self.bind(event_str, lambda e, h=handler: h())
+                    self._bound_shortcuts.append(event_str)
+                except Exception:
+                    pass
+        
         self.log_action("Keyboard shortcuts enabled")
     
     def setup_drag_drop(self):
